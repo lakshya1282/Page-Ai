@@ -78,5 +78,25 @@
     "promptPath": "prompt/primland.md",
     "isPremium": false,
     "tags": ["hero section", "luxury", "real estate", "nature", "video"]
+  },
+  {
+    "id": "scenery",
+    "title": "Scenery",
+    "category": "Hero Section",
+    "thumbnail": "/previews/landscape ai.png",
+    "previewUrl": "/previews/landscape ai.png",
+    "promptPath": "prompt/landscape ai.md",
+    "isPremium": false,
+    "tags": ["hero section", "nature", "wellness", "glassmorphism"]
+  },
+  {
+    "id": "mindloop",
+    "title": "Mindloop",
+    "category": "Hero Section",
+    "thumbnail": "/previews/mindloop.mp4",
+    "previewUrl": "/previews/mindloop.mp4",
+    "promptPath": "prompt/mindloop.md",
+    "isPremium": false,
+    "tags": ["hero section", "mindloop", "glassmorphism", "cinematic"]
   }
 ]
