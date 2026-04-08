@@ -16,7 +16,7 @@
     "thumbnail": "/thumbnails/cyberpunk-portfolio.png",
     "previewUrl": "/previews/cyberpunk-portfolio.png",
     "prompt": "Design a cyberpunk-themed developer portfolio. Use a strict 12-column grid, neon electric blue and purple accents, and high-contrast typography. Background should be true black. Hero section should feature a 3D-effect scanline background and a futuristic navigation bar with glitch hover effects.",
-    "isPremium": true,
+    "isPremium": false,
     "tags": ["portfolio", "cyberpunk", "neon", "grid"]
   },
   {
@@ -36,7 +36,7 @@
     "thumbnail": "/previews/budwieser.mp4",
     "previewUrl": "/previews/budwieser.mp4",
     "promptPath": "prompt/budweiser.md",
-    "isPremium": true,
+    "isPremium": false,
     "tags": ["product", "budweiser", "beverage", "editorial"]
   },
   {
@@ -56,7 +56,27 @@
     "thumbnail": "/previews/lucid.mp4",
     "previewUrl": "/previews/lucid.mp4",
     "promptPath": "prompt/lucid.md",
-    "isPremium": true,
+    "isPremium": false,
     "tags": ["hero section", "lucid", "video", "glassmorphism"]
+  },
+  {
+    "id": "nexora",
+    "title": "Nexora",
+    "category": "Hero Section",
+    "thumbnail": "/previews/nexora.mp4",
+    "previewUrl": "/previews/nexora.mp4",
+    "promptPath": "prompt/nexora.md",
+    "isPremium": false,
+    "tags": ["hero section", "nexora", "glassmorphism", "high-performance"]
+  },
+  {
+    "id": "primland",
+    "title": "Primland",
+    "category": "Hero Section",
+    "thumbnail": "/previews/primland.mp4",
+    "previewUrl": "/previews/primland.mp4",
+    "promptPath": "prompt/primland.md",
+    "isPremium": false,
+    "tags": ["hero section", "luxury", "real estate", "nature", "video"]
   }
 ]
