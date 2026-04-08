@@ -1,0 +1,42 @@
+[
+  {
+    "id": "liquid-glass-agency",
+    "title": "Liquid Glass Agency",
+    "category": "Agency",
+    "thumbnail": "/thumbnails/liquid-glass-agency.png",
+    "previewUrl": "/previews/liquid-glass-agency.png",
+    "prompt": "Create a high-end agency landing page with an ethereal botanical background using p5.js-like fluid effects. Use a dark theme (#000000), cyan accents (#06b6d4), and glassmorphic UI cards. Include a hero section with a bold heading in Cabinet Grotesk, a sub-headline, and two CTA buttons.",
+    "isPremium": false,
+    "tags": ["agency", "dark", "minimal", "ethereal"]
+  },
+  {
+    "id": "cyberpunk-portfolio",
+    "title": "Cyberpunk Portfolio",
+    "category": "Portfolio",
+    "thumbnail": "/thumbnails/cyberpunk-portfolio.png",
+    "previewUrl": "/previews/cyberpunk-portfolio.png",
+    "prompt": "Design a cyberpunk-themed developer portfolio. Use a strict 12-column grid, neon electric blue and purple accents, and high-contrast typography. Background should be true black. Hero section should feature a 3D-effect scanline background and a futuristic navigation bar with glitch hover effects.",
+    "isPremium": true,
+    "tags": ["portfolio", "cyberpunk", "neon", "grid"]
+  },
+  {
+    "id": "minimalist-saas",
+    "title": "Minimalist SaaS",
+    "category": "SaaS",
+    "thumbnail": "/thumbnails/minimalist-saas.png",
+    "previewUrl": "/previews/minimalist-saas.png",
+    "prompt": "An ultra-minimalist SaaS landing page. monochrome color palette (black, white, gray). Focus on high-quality typography and whitespace. Use a brutalist grid system for the features section with sharp borders and no shadows. Include a clean pricing table and a sticky navigation bar with a glass effect.",
+    "isPremium": false,
+    "tags": ["saas", "minimalist", "monochrome", "brutalist"]
+  },
+  {
+    "id": "smooth-product-landing-page",
+    "title": "Smooth Product Landing Page",
+    "category": "Landing Page",
+    "thumbnail": "/previews/budwieser.mp4",
+    "previewUrl": "/previews/budwieser.mp4",
+    "promptPath": "prompt/budweiser.md",
+    "isPremium": false,
+    "tags": ["product", "smooth", "beverage", "editorial"]
+  }
+]
