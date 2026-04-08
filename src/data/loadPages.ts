@@ -1,3 +1,5 @@
+import { readFile } from "node:fs/promises";
+import path from "node:path";
 import pagesData from "@/data/pages.json";
 import { type PageData } from "@/components/PageCard";
 
@@ -11,6 +13,11 @@ export async function loadPages(): Promise<PageData[]> {
 
   return Promise.all(
     entries.map(async (entry) => {
+      const prompt =
+        entry.promptPath != null
+          ? await readFile(path.join(process.cwd(), entry.promptPath), "utf8")
+          : (entry.prompt ?? "");
+
       if (entry.isPremium) {
         return {
           ...entry,
@@ -20,7 +27,7 @@ export async function loadPages(): Promise<PageData[]> {
 
       return {
         ...entry,
-        prompt: entry.prompt ?? "",
+        prompt,
       };
     }),
   );

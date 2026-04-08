@@ -38,5 +38,25 @@
     "promptPath": "prompt/budweiser.md",
     "isPremium": true,
     "tags": ["product", "budweiser", "beverage", "editorial"]
+  },
+  {
+    "id": "duna",
+    "title": "DUNA",
+    "category": "Landing Page",
+    "thumbnail": "/previews/DUNA.mp4",
+    "previewUrl": "/previews/DUNA.mp4",
+    "promptPath": "prompt/DUNA.md",
+    "isPremium": false,
+    "tags": ["duna", "brand", "landing", "video"]
+  },
+  {
+    "id": "lucid",
+    "title": "Lucid",
+    "category": "Hero Section",
+    "thumbnail": "/previews/lucid.mp4",
+    "previewUrl": "/previews/lucid.mp4",
+    "promptPath": "prompt/lucid.md",
+    "isPremium": true,
+    "tags": ["hero section", "lucid", "video", "glassmorphism"]
   }
 ]
