@@ -31,12 +31,12 @@
   },
   {
     "id": "smooth-product-landing-page",
-    "title": "Smooth Product Landing Page",
+    "title": "Budweiser Landing Page",
     "category": "Landing Page",
     "thumbnail": "/previews/budwieser.mp4",
     "previewUrl": "/previews/budwieser.mp4",
     "promptPath": "prompt/budweiser.md",
-    "isPremium": false,
-    "tags": ["product", "smooth", "beverage", "editorial"]
+    "isPremium": true,
+    "tags": ["product", "budweiser", "beverage", "editorial"]
   }
 ]

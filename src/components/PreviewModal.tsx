@@ -5,7 +5,7 @@ import { X, Lock } from "lucide-react";
 import Image from "next/image";
 import { CopyButton } from "./CopyButton";
 import { type PageData } from "./PageCard";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 interface PreviewModalProps {
   page: PageData | null;
@@ -17,17 +17,69 @@ function isVideoAsset(src: string) {
 }
 
 export function PreviewModal({ page, onClose }: PreviewModalProps) {
+  const [showPremiumDialog, setShowPremiumDialog] = useState(false);
+  const [isRedirectingToCheckout, setIsRedirectingToCheckout] = useState(false);
+  const [checkoutError, setCheckoutError] = useState<string | null>(null);
+
   // Prevent scrolling when modal is open
   useEffect(() => {
     if (page) {
       document.body.style.overflow = "hidden";
     } else {
       document.body.style.overflow = "unset";
+      setShowPremiumDialog(false);
+      setIsRedirectingToCheckout(false);
+      setCheckoutError(null);
     }
     return () => {
       document.body.style.overflow = "unset";
     };
   }, [page]);
+
+  const handlePremiumClick = () => {
+    setCheckoutError(null);
+    setShowPremiumDialog(true);
+  };
+
+  const handleBuyTemplate = async () => {
+    if (!page) {
+      return;
+    }
+
+    setIsRedirectingToCheckout(true);
+    setCheckoutError(null);
+
+    try {
+      const response = await fetch("/api/stripe/checkout", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          pageId: page.id,
+        }),
+      });
+
+      const rawResponse = await response.text();
+      const data = (rawResponse ? JSON.parse(rawResponse) : {}) as {
+        url?: string;
+        error?: string;
+      };
+
+      if (!response.ok || !data.url) {
+        throw new Error(data.error ?? "Unable to start checkout.");
+      }
+
+      window.location.href = data.url;
+    } catch (error) {
+      setCheckoutError(
+        error instanceof Error
+          ? error.message
+          : "Unable to start checkout.",
+      );
+      setIsRedirectingToCheckout(false);
+    }
+  };
 
   return (
     <AnimatePresence>
@@ -62,15 +114,18 @@ export function PreviewModal({ page, onClose }: PreviewModalProps) {
               </div>
 
               <div className="flex items-center gap-4">
-                {page.isPremium ? (
-                  <button className="flex items-center gap-2 px-6 py-2 bg-amber-500 hover:bg-amber-600 text-black text-sm font-bold rounded-full transition-all group">
-                    <Lock className="w-4 h-4 group-hover:rotate-12 transition-transform" />
-                    Unlock Prompt
-                  </button>
-                ) : (
-                  <CopyButton text={page.prompt} />
-                )}
-                
+                <CopyButton
+                  text={page.prompt}
+                  locked={page.isPremium}
+                  lockedLabel={page.isPremium ? "Premium Template" : undefined}
+                  onLockedClick={page.isPremium ? handlePremiumClick : undefined}
+                  className={
+                    page.isPremium
+                      ? "bg-amber-500 text-black border-amber-400 hover:bg-amber-400 hover:text-black"
+                      : undefined
+                  }
+                />
+
                 <button
                   onClick={onClose}
                   className="p-2 hover:bg-zinc-800 rounded-full transition-colors text-zinc-400 hover:text-white"
@@ -151,6 +206,74 @@ export function PreviewModal({ page, onClose }: PreviewModalProps) {
               </div>
             </div>
           </motion.div>
+
+          <AnimatePresence>
+            {showPremiumDialog && page?.isPremium ? (
+              <>
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  className="fixed inset-0 z-[109] bg-black/70"
+                  onClick={() => {
+                    if (!isRedirectingToCheckout) {
+                      setShowPremiumDialog(false);
+                    }
+                  }}
+                />
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.96, y: 20 }}
+                  animate={{ opacity: 1, scale: 1, y: 0 }}
+                  exit={{ opacity: 0, scale: 0.96, y: 20 }}
+                  className="fixed left-1/2 top-1/2 z-[110] w-[92%] max-w-md -translate-x-1/2 -translate-y-1/2 rounded-3xl border border-amber-500/30 bg-zinc-950 p-6 shadow-2xl"
+                >
+                  <div className="mb-5 flex items-center gap-3">
+                    <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-amber-500 text-black">
+                      <Lock className="h-5 w-5" />
+                    </div>
+                    <div>
+                      <p className="text-xs font-bold uppercase tracking-[0.3em] text-amber-400">
+                        Premium Template
+                      </p>
+                      <h3 className="text-xl font-semibold text-white">
+                        Unlock this prompt for Rs 200
+                      </h3>
+                    </div>
+                  </div>
+
+                  <p className="text-sm leading-relaxed text-zinc-400">
+                    {page.title} is a premium template. Buy access to continue to
+                    the Stripe payment gateway, or cancel and keep browsing.
+                  </p>
+
+                  {checkoutError ? (
+                    <p className="mt-4 rounded-2xl border border-red-500/30 bg-red-500/10 px-4 py-3 text-sm text-red-200">
+                      {checkoutError}
+                    </p>
+                  ) : null}
+
+                  <div className="mt-6 flex gap-3">
+                    <button
+                      onClick={handleBuyTemplate}
+                      disabled={isRedirectingToCheckout}
+                      className="flex-1 rounded-full bg-amber-500 px-5 py-3 text-sm font-bold text-black transition hover:bg-amber-400 disabled:cursor-not-allowed disabled:opacity-60"
+                    >
+                      {isRedirectingToCheckout
+                        ? "Redirecting..."
+                        : "Buy for Rs 200"}
+                    </button>
+                    <button
+                      onClick={() => setShowPremiumDialog(false)}
+                      disabled={isRedirectingToCheckout}
+                      className="rounded-full border border-zinc-700 px-5 py-3 text-sm font-medium text-zinc-300 transition hover:border-zinc-500 hover:text-white disabled:cursor-not-allowed disabled:opacity-60"
+                    >
+                      Cancel
+                    </button>
+                  </div>
+                </motion.div>
+              </>
+            ) : null}
+          </AnimatePresence>
         </>
       )}
     </AnimatePresence>
