@@ -98,5 +98,15 @@
     "promptPath": "prompt/mindloop.md",
     "isPremium": false,
     "tags": ["hero section", "mindloop", "glassmorphism", "cinematic"]
+  },
+  {
+    "id": "evo",
+    "title": "Evo",
+    "category": "Hero Section",
+    "thumbnail": "/previews/evo.mp4",
+    "previewUrl": "/previews/evo.mp4",
+    "promptPath": "prompt/evo.md",
+    "isPremium": false,
+    "tags": ["hero section", "evo", "glassmorphism", "cinematic", "premium"]
   }
 ]
